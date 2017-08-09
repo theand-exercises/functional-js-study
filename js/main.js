@@ -139,7 +139,7 @@ console.log(_go(10,
 console.log('---- go_with_reduce 만들기');
 
 function _go_with_reduce(seed, ...callback) {
-    return _reduce(callback, (s,v) => v(s), seed);
+    return _reduce(callback, (s, v) => v(s), seed);
 }
 
 
@@ -150,3 +150,14 @@ console.log(_go_with_reduce(10,
     v => v / 2,
     v => v - 1,
     v => v * 2));
+
+
+console.log('---- 컬렉션 테스트 with own');
+//1) 전체 수량 구하기
+
+console.log("Total count : ", _reduce(products, countWholeProductFrom, 0));
+
+
+//3) 선택된 전체 수량 구하기
+
+console.log("Total selected count : ", _reduce(_filter(products, isSelected), countWholeProductFrom, 0));
