@@ -28,7 +28,7 @@ var products = [
     }
 ];
 
-console.log('------------');
+console.log('---- 컬렉션 테스트');
 //1) 전체 수량 구하기
 const countWholeProductFrom = (total_count, per_product) => {
     total_count += per_product.sizes.reduce((product_count, per_size) => product_count += per_size.quantity, 0);
@@ -45,8 +45,7 @@ console.log("Total selected count : ", products.filter(isSelected).reduce(countW
 
 
 
-console.log('------------');
-// each 만들기
+console.log('---- each 만들기');
 const arr = [1,2,3,4];
 
 console.log("original .forEach");
@@ -63,5 +62,24 @@ console.log("own _each");
 _each(arr, function(v,i,d){
     console.log(v);
 });
+
+
+
+console.log('---- map 만들기');
+
+// const arr = [1,2,3,4];
+console.log("original .map");
+console.log( arr.map( v => v+1 ));
+
+function _map(collection, callback){
+    var result=[];
+    for(var i=0; i<collection.length; i++){
+        result.push( callback(collection[i]) );
+    }
+    return result;
+}
+
+console.log("own _map");
+console.log( _map(arr, v => v+1) );
 
 
