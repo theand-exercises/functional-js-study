@@ -44,15 +44,14 @@ const isSelected = per_product => per_product.is_selected;
 console.log("Total selected count : ", products.filter(isSelected).reduce(countWholeProductFrom, 0));
 
 
-
 console.log('---- each 만들기');
-const arr = [1,2,3,4];
+const arr = [1, 2, 3, 4];
 
 console.log("native .forEach");
-arr.forEach( e => console.log(e));
+arr.forEach(e => console.log(e));
 
-function _each(collection, callback){
-    for(var i=0; i<collection.length; i++){
+function _each(collection, callback) {
+    for (var i = 0; i < collection.length; i++) {
         callback(collection[i], i, collection);
     }
 
@@ -62,36 +61,34 @@ console.log("own _each");
 _each(arr, e => console.log(e));
 
 
-
 console.log('---- map 만들기');
 
 // const arr = [1,2,3,4];
 console.log("native .map");
-console.log( arr.map( v => v+1 ));
+console.log(arr.map(v => v + 1));
 
-function _map(collection, callback){
-    var result=[];
-    for(var i=0; i<collection.length; i++){
-        result.push( callback(collection[i]) );
+function _map(collection, callback) {
+    var result = [];
+    for (var i = 0; i < collection.length; i++) {
+        result.push(callback(collection[i]));
     }
     return result;
 }
 
 console.log("own _map");
-console.log( _map(arr, v => v+1) );
-
+console.log(_map(arr, v => v + 1));
 
 
 console.log('---- filter 만들기');
 
 // const arr = [1,2,3,4];
 console.log("native .filter");
-console.log( arr.filter( v => v%2==0 ));
+console.log(arr.filter(v => v % 2 == 0));
 
-function _filter(collection, callback){
-    var result=[];
-    for(var i=0; i<collection.length; i++){
-        if( callback(collection[i]) ) {
+function _filter(collection, callback) {
+    var result = [];
+    for (var i = 0; i < collection.length; i++) {
+        if (callback(collection[i])) {
             result.push(collection[i]);
         }
     }
@@ -99,27 +96,57 @@ function _filter(collection, callback){
 }
 
 console.log("own _filter");
-console.log( _filter(arr, v => v%2==0) );
-
+console.log(_filter(arr, v => v % 2 == 0));
 
 
 console.log('---- reduce 만들기');
 
 // const arr = [1,2,3,4];
 console.log("native .reduce");
-console.log( arr.reduce( (s,v) => s+=v, 0 ));
+console.log(arr.reduce((s, v) => s += v, 0));
 
-function _reduce(collection, callback, seed){
+function _reduce(collection, callback, seed) {
     var result = seed;
-    for(var i=0; i<collection.length;i++){
+    for (var i = 0; i < collection.length; i++) {
         result = callback(result, collection[i]);
     }
     return result;
 }
 
 console.log("own _reduce");
-console.log( _reduce(arr, (s,v) => s+=v, 0) );
+console.log(_reduce(arr, (s, v) => s += v, 0));
 
 
+console.log('---- go 만들기');
+
+function _go(seed, ...callback) {
+    var result = seed;
+    for (var i = 0; i < callback.length; i++) {
+        result = callback[i](result);
+    }
+    return result;
+}
 
 
+console.log("own _go");
+console.log(_go(10,
+    v => v + 1,
+    v => v * 2,
+    v => v / 2,
+    v => v - 1,
+    v => v * 2));
+
+console.log('---- go_with_reduce 만들기');
+
+function _go_with_reduce(seed, ...callback) {
+    return _reduce(callback, (s,v) => v(s), seed);
+}
+
+
+console.log("own _go_with_reduce");
+console.log(_go_with_reduce(10,
+    v => v + 1,
+    v => v * 2,
+    v => v / 2,
+    v => v - 1,
+    v => v * 2));
