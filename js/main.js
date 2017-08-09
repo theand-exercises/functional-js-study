@@ -101,3 +101,25 @@ function _filter(collection, callback){
 console.log("own _filter");
 console.log( _filter(arr, v => v%2==0) );
 
+
+
+console.log('---- reduce 만들기');
+
+// const arr = [1,2,3,4];
+console.log("native .reduce");
+console.log( arr.reduce( (s,v) => s+=v, 0 ));
+
+function _reduce(collection, callback, seed){
+    var result = seed;
+    for(var i=0; i<collection.length;i++){
+        result = callback(result, collection[i]);
+    }
+    return result;
+}
+
+console.log("own _reduce");
+console.log( _reduce(arr, (s,v) => s+=v, 0) );
+
+
+
+
