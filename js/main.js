@@ -48,7 +48,7 @@ console.log("Total selected count : ", products.filter(isSelected).reduce(countW
 console.log('---- each 만들기');
 const arr = [1,2,3,4];
 
-console.log("original .forEach");
+console.log("native .forEach");
 arr.forEach( e => console.log(e));
 
 function _each(collection, callback){
@@ -59,16 +59,14 @@ function _each(collection, callback){
 }
 
 console.log("own _each");
-_each(arr, function(v,i,d){
-    console.log(v);
-});
+_each(arr, e => console.log(e));
 
 
 
 console.log('---- map 만들기');
 
 // const arr = [1,2,3,4];
-console.log("original .map");
+console.log("native .map");
 console.log( arr.map( v => v+1 ));
 
 function _map(collection, callback){
@@ -82,4 +80,24 @@ function _map(collection, callback){
 console.log("own _map");
 console.log( _map(arr, v => v+1) );
 
+
+
+console.log('---- filter 만들기');
+
+// const arr = [1,2,3,4];
+console.log("native .filter");
+console.log( arr.filter( v => v%2==0 ));
+
+function _filter(collection, callback){
+    var result=[];
+    for(var i=0; i<collection.length; i++){
+        if( callback(collection[i]) ) {
+            result.push(collection[i]);
+        }
+    }
+    return result;
+}
+
+console.log("own _filter");
+console.log( _filter(arr, v => v%2==0) );
 
