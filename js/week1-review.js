@@ -100,6 +100,20 @@ console.log(grouped_products);
 
 // 5) 제품명이 "후드티"인 제품의 가격 총합 (사이즈별 가격 변동 조건 포함)
 var hood_product_total_price;
+var is_hoodtee = e => e.name == '후드티';
+
+hood_product_total_price = _reduce(
+    _filter(products, is_hoodtee),
+    (sum, p) => {
+        sum += _reduce(p.sizes,
+            (sizesum, s) => {
+                sizesum += (p.price+s.price)*s.quantity;
+                return sizesum;
+            },
+            0);
+        return sum;
+}, 0);
+
 console.log(hood_product_total_price);
 
 // 6) 가격이 2만원대인 제품 중에서 재고가 있는 제품 찾기
