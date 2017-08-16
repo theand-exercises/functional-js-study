@@ -85,7 +85,7 @@ console.log(popluar_under_20000_products);
 var grouped_products;
 
 
-grouped_products = products.reduce( (pa, per_product) => {
+grouped_products = _reduce(products,  (pa, per_product) => {
     var group_price =  Math.round((per_product.price - (per_product.price%10000)) / 10000);
     var key = `${group_price}만원`;
     if( !pa[key] ) {
