@@ -26,6 +26,8 @@ usernames_under_30 =
         , []);
 console.log(usernames_under_30);
 
+//TODO _go
+
 // 2. 30세 이상의 유저의 id 목록
 
 let useridss_over_30;
@@ -40,6 +42,7 @@ useridss_over_30 =
         , []);
 console.log(useridss_over_30);
 
+//TODO _go
 
 // 3. 30세 미만의 유저들의 나이의 총합
 
@@ -54,6 +57,7 @@ sum_of_ages_under_30 =
         , 0);
 console.log(sum_of_ages_under_30);
 
+//TODO _go
 
 
 // 4. 이름이 'PJ'인 유저의 나이
