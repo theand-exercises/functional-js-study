@@ -49,19 +49,20 @@
         $.on('change', '.filter input[type=checkbox]', function() {
             // console.log(this.name);
             // console.log(this.value);
-            //선택한 키의 이름과 값을 가져옴
-            //전체 영화에 대해 필터링
-            //그 키와 값이 있느냐
 
+            //only rating
+            console.log("===========only rating");
             const checked_value = _.map(document.querySelectorAll("input[name=movie_rating]:checked"), e => e.value);
-            // console.log(checked_value);
-
-            console.log( _filter(movies, e=> _.contains(checked_value, e.movie_rating) ));
+            console.log("checked_value : ", checked_value);
 
 
+            console.log("matching : ", _filter(movies, e=> _.contains(checked_value, e.movie_rating) ));
 
+
+
+            //whole checked
+            console.log("===========complex");
             const whole_checked_value_map = _.reduce( document.querySelectorAll("input:checked"), (result, c) => {
-                "use strict";
                 if( !result[c.name]){
                     result[c.name] = [];
                 }
@@ -70,7 +71,7 @@
                 return result;
 
             }, {});
-            console.log(whole_checked_value_map);
+            console.log("whole_checked_value_map : ", whole_checked_value_map);
 
             // function matchingCriteria(value_map, e){
             //     "use strict";
