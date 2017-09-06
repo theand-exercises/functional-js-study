@@ -111,10 +111,20 @@
             lo.items,
             D.html_to('.movie_list'))),
 
+        //가장 개봉한 영화가 가장 많았던 해의 총 관람객 수
         D.on('click', '.extension .btn1', __(
             function(e) {
                 let data = lo.current_list || movies;
 
+                total_attendance = _.go(data,
+                    _.groupBy(m => m.date.split('-')[0]),
+                    _.max(y => y.length ),
+                    _.reduce((total, m) => total+m.attendance, 0)
+                    );
+
+                console.log("total_attendance : ", total_attendance);
+
+                return total_attendance;
             }, _.log)),
 
         D.on('click', '.extension .btn2', __(
