@@ -116,15 +116,12 @@
             function(e) {
                 let data = lo.current_list || movies;
 
-                total_attendance = _.go(data,
+                return _.go(data,
                     _.groupBy(m => m.date.split('-')[0]),
                     _.max(y => y.length ),
                     _.reduce((total, m) => total+m.attendance, 0)
                     );
 
-                console.log("total_attendance : ", total_attendance);
-
-                return total_attendance;
             }, _.log)),
 
         D.on('click', '.extension .btn2', __(
