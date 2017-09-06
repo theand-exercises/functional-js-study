@@ -7,20 +7,28 @@
         return obj;
     }, { ratings: [], genres: [], directors: [] });
 
-    _.each(D('.movie_box'), __(
-        _.c([movies, lo.criterias]),
-        _.to_mr,
-        _.t('$, cris', `
+    _.each($('.movie_box'), __(
+        _.c(movies),
+        _.t$(`
       .header
         .title 
           h3 한국 영화 무비 박스
-        .filter {{_.go(cris, `, _.sum(_.t('cri, k', `
-          .{{k}}
-            label {{(k == 'ratings') ? '등급' : (k == 'genres') ? '장르' : '감독'}} 
-            .inputs {{_.go(cri, _.sum(`, _.t$(`
+        .filter
+          .rating
+            label 등급 
+            .inputs {{_.go($, _.map(m => m.rating), _.uniq, _.sum(`, _.t$(`
               input[type=checkbox name=rating value='{{$}}'] {{$}}
             `) ,`))}}
-        `)) ,`)}}
+          .genre
+            label 장르 
+            .inputs {{_.go($, _.map(m => m.genre), _.uniq, _.sum(`, _.t$(`
+              input[type=checkbox name=genre value='{{$}}'] {{$}}
+            `) ,`))}}
+          .director
+            label 감독 
+            .inputs {{_.go($, _.map(m => m.director), _.uniq, _.sum(`, _.t$(`
+              input[type=checkbox name=director value='{{$}}'] {{$}}
+            `) ,`))}}
         .sort
           label 정렬
           select
@@ -67,6 +75,43 @@
         D.on('change', '.filter input[type=checkbox]', __(
             function(e) {
                 let filtered_data = [];
+
+                console.log("===========complex");
+                const whole_checked_value_map = _.reduce(document.querySelectorAll("input:checked"), (result, c) => {
+                    if (!result[c.name]) {
+                        result[c.name] = [];
+                    }
+                    result[c.name].push(c.value);
+                    result[c.name] = _.uniq(result[c.name]);
+                    return result;
+
+                }, {});
+                console.log("whole_checked_value_map : ", whole_checked_value_map);
+
+                filtered_data = _.filter(movies, m => {
+                    // return _.filter(whole_checked_value_map, (c,i) => {
+                    //     console.log(" m : ", m);
+                    //     console.log("c : ", c);
+                    //     console.log("i : ", i);
+                    //     console.log("contains : ", _.contains(c, m[i]));
+                    //     return _.contains(c, m[i]);
+                    // });
+
+                    return _.reduce( whole_checked_value_map, (result, c, i) => {
+                        return _.contains(c, m[i]) && result
+
+                    }, true );
+
+                    //iterative
+                    // for (var c in whole_checked_value_map) {
+                    //     if( !_.contains(whole_checked_value_map[c], m[c]) ){
+                    //         return false;
+                    //     }
+                    // }
+                    // return true;
+                });
+
+                console.log("filtered_data : ", filtered_data);
 
                 return filtered_data;
             },
