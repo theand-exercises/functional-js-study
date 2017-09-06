@@ -76,7 +76,6 @@
             function(e) {
                 let filtered_data = [];
 
-                console.log("===========complex");
                 const whole_checked_value_map = _.reduce(document.querySelectorAll("input:checked"), (result, c) => {
                     if (!result[c.name]) {
                         result[c.name] = [];
@@ -86,7 +85,6 @@
                     return result;
 
                 }, {});
-                console.log("whole_checked_value_map : ", whole_checked_value_map);
 
                 filtered_data = _.filter(movies, m => {
 
@@ -94,17 +92,7 @@
                         return _.contains(c, m[i]) && result
 
                     }, true );
-
-                    //iterative
-                    // for (var c in whole_checked_value_map) {
-                    //     if( !_.contains(whole_checked_value_map[c], m[c]) ){
-                    //         return false;
-                    //     }
-                    // }
-                    // return true;
                 });
-
-                console.log("filtered_data : ", filtered_data);
 
                 return filtered_data;
             },
@@ -114,6 +102,8 @@
 
         D.on('change', '.sort select', __(
             function(e) {
+                console.log(e.$currentTarget.value)
+                let data = lo.current_list || movies;
                 let sorted_data = [];
 
                 return sorted_data;
