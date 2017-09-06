@@ -89,13 +89,6 @@
                 console.log("whole_checked_value_map : ", whole_checked_value_map);
 
                 filtered_data = _.filter(movies, m => {
-                    // return _.filter(whole_checked_value_map, (c,i) => {
-                    //     console.log(" m : ", m);
-                    //     console.log("c : ", c);
-                    //     console.log("i : ", i);
-                    //     console.log("contains : ", _.contains(c, m[i]));
-                    //     return _.contains(c, m[i]);
-                    // });
 
                     return _.reduce( whole_checked_value_map, (result, c, i) => {
                         return _.contains(c, m[i]) && result
