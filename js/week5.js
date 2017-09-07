@@ -124,9 +124,18 @@
 
             }, _.log)),
 
+        //2000년대 개봉한 영화 중 가장 관객수가 적은 영화
         D.on('click', '.extension .btn2', __(
             function(e) {
                 let data = lo.current_list || movies;
+                return _.go(data,
+                    _.groupBy(m => m.date.split('-')[0]),
+                    _.pick( (m, index) => Number(index) >= 2000),
+                    _.values,
+                    _.flatten,
+                    _.min( m => m.attendance ),
+                );
+
 
             }, _.log))
     ))
