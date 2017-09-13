@@ -1,4 +1,19 @@
 !function(lo) {
+    let _memoize = function(fn1, fn2){
+        "use strict";
+        console.log("fn1 : ", fn1);
+        console.log("fn2 : ", fn2);
+
+        // const hashed = fn2.apply(this, arguments);
+
+        // console.log("hashed : ", hashed);
+
+        function memoize(arr, fn1, fn2){
+
+        }
+        return fn1;
+    };
+
   _.each($('.movie_box'), __(
     _.c(movies),
     _.t$(`
@@ -47,9 +62,11 @@
         ((result[c.name] ? result[c.name].push(c.value) : result[c.name] = [c.value]), result), {}),
       checked_map => !_.is_empty(checked_map) ? checked_map :
         (lo.filter_value_map || (lo.filter_value_map = lo.group_by_filter_name(D('.inputs input')))),
-      _.memoize( // movie_filter
+      _.hi,
+      _memoize( // movie_filter
         checked_map => {
           return _.filter(movies, m => {
+              console.log("hi");
             return _.every(_.map(checked_map, (arr, key) => _.contains(arr, m[key])))
           })
         },
